@@ -1,0 +1,98 @@
+<?php $list = $usr->listUser(); ?>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Tableau de bord</h1>
+     </div>
+     <h3 class="text-center">liste du personnel</h3>
+     <div class="table-responsive">
+     <table class="table table-striped table-sm mt-5">
+     <thead>
+          <tr>
+               <th>Nom</th>
+               <th>Prénom</th>
+               <th>Pseudo</th>
+               <th>Email</th>
+               <th>Photo</th>
+               <th>Action</th>
+          </tr>
+     </thead>
+     <tbody>
+          <?php foreach($list as $l){ ?>
+          <tr>
+               <td><?=$l->lastname?$l->lastname:'<i class="text-danger">non renseigné</i>'?></td>
+               <td><?=$l->firstname?$l->firstname:'<i class="text-danger">non renseigné</i>'?></td>
+               <td><?=$l->pseudo?$l->pseudo:'<i class="text-danger">non renseigné</i>'?></td>
+               <td><?=$l->email?> <?php if($l->account){echo "<br> (<b>Administrateur</b>)";}?>  </td>
+               <td>
+                    <img src="<?=BASE_URL.'img/avatar/'.$l->avatar?>" style="border-radius:100%" alt="" width="40">
+               </td>
+               <td>
+                    <?php if($_SESSION['is_admin'] && $l->id != $_SESSION['usr_hetic']){ ?>
+                         <a onclick="return confirm('Voulez-vous supprimer <?=$l->firstname?> <?=$l->lastname?> <?=!$l->lastname?$l->email:''?> ?')" href="controllers/deleteUser.php?id=<?=$l->id?>">
+                              <img src="<?=BASE_URL.'img/delete.svg'?>" width="24" alt="">
+                         </a> &nbsp;&nbsp;
+                    <?php } ?>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal_<?=$l->id?>">
+                         <img src="<?=BASE_URL.'img/view-details.svg'?>" width="24" alt="">
+                    </a>
+               </td>
+          </tr>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal_<?=$l->id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                         <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Fiche contact</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                              </button>
+                         </div>
+                         <div class="modal-body">
+                         <ul class="list-group mb-3">
+                                   <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <small></small>
+                                        <h6 class="my-0"><img src="<?=BASE_URL.'img/avatar/'.$l->avatar?>" style="border-radius:100%" alt="" width="100"></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <small>Email</small>
+                                        <h6 class="my-0"><?=$l->email?></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <small class="text-muted">Nom</small>
+                                        <h6 class="my-0"><?=$l->lastname?$l->lastname:'<i class="text-danger">non renseigné</i>'?></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <small class="text-muted">Prénom</small>
+                                        <h6 class="my-0"><?=$l->firstname?$l->firstname:'<i class="text-danger">non renseigné</i>'?></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <small class="text-muted">Pseudo</small>
+                                        <h6 class="my-0"><?=$l->pseudo?$l->pseudo:'<i class="text-danger">non renseigné</i>'?></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <small class="text-muted">Date de naissance</small>
+                                        <h6 class="my-0"><?=$l->birthday?$l->birthday:'<i class="text-danger">non renseigné</i>'?></h6>
+                                   </li>
+                                   <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <div>
+                                             <small class="text-muted">Adresse</small>
+                                             <h6 class="my-0"><?=$l->addresse?$l->addresse:'<i class="text-danger">non renseigné</i>'?></h6>
+                                        </div>
+                                   </li>
+                                   
+                              </ul>
+                         </div>
+                         <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                              <?php if($_SESSION['is_admin'] && $l->id != $_SESSION['usr_hetic']){ ?>
+                                   <a onclick="return confirm('Voulez-vous restaurer le mot de passe en 123456 ?')" href="controllers/resetPassword.php?id=<?=$l->id?>" class="btn btn-danger">Restaurer le mot de passe</a>
+                              <?php } ?>
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <?php } ?>
+     </tbody>
+     </table>
+     </div>
+</main>

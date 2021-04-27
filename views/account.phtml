@@ -1,0 +1,113 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Gestion de compter</h1>
+     </div>
+     <p class="text-danger text-center">
+         <i>
+            <?php 
+                if(is_null($me->firstname)){
+                    echo "* Veuillez compléter vos informations personnelles et penser à changer votre mot de passe";
+                }
+            ?>
+         </i>
+     </p>
+     <div>
+        <ul class="nav nav-pills m-auto col-4" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Mon profil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Mon compte</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row g-3 mt-5 mb-3">
+                    <div class="col-md-7 col-lg-8 m-auto">
+                        <h4 class="mb-3">Modifier mes données de profil</h4>
+                        <form class="needs-validation mt-5 mb-5" id="form_profil" enctype="multipart/form-data">
+                            <div class="row g-3">
+                                <div class="col-12 message-profil"></div>
+                                <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Nom *</label>
+                                    <input type="text" class="form-control require" id="lastName" name="lastname" value="<?=$me->lastname?>">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Prénom *</label>
+                                    <input type="text" class="form-control require" id="firstName" name="firstname" value="<?=$me->firstname?>">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="pseudo" class="form-label">Pseudo </label>
+                                    <input type="text" class="form-control" id="pseudo" name="pseudo" value="<?=$me->pseudo?>">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">Adresse compète *</label>
+                                    <input type="text" class="form-control require" id="address" name="address" value="<?=$me->addresse?>">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="date" class="form-label">Date de naissance *</label>
+                                    <input type="date" class="form-control require" id="date" name="date" value="<?=$me->birthday?>">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Photo de profil</label>
+                                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                                    <input type="hidden" name="old_photo" value="<?=$me->avatar?>">
+                                </div>
+
+                                <div class="col-sm-6 text-center">
+                                    <img src="<?=BASE_URL.'img/avatar/'.$me->avatar?>" style="border-radius: 100%" id="avatar" width="100">
+                                </div>
+
+                            </div>
+
+                            <hr class="my-4">
+
+                            <button class="w-100 btn btn-success" id="submit_profil" type="submit">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row g-3 mt-5 mb-3">
+                    <div class="col-md-7 col-lg-8 m-auto">
+                        <h4 class="mb-3">Modifier le mot passe</h4>
+                        <form class="needs-validation mt-5 mb-5">
+                            <div class="row g-3">
+                                <div class="col-12 message-pass"></div>
+
+                                <div class="col-12">
+                                    <label for="pseudo" class="form-label">Ancien mot de passe *</label>
+                                    <input type="password" class="form-control require-pass" id="apwd" placeholder="">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">Nouveau mot de passe *</label>
+                                    <input type="password" class="form-control require-pass" id="npwd" placeholder="">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="address" class="form-label">confirmer le moit de passe *</label>
+                                    <input type="password" class="form-control require-pass" id="cpwd" placeholder="">
+                                </div>
+
+                            </div>
+
+                            <hr class="my-4">
+
+                            <button class="w-100 btn btn-success" onclick="return false" id="submit_pass" type="submit">Modifier</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <input type="hidden" id="id" value="<?=$me->id?>">
+        </div>
+     </div>
+  </form>
+</main>

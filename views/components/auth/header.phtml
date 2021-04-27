@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <title>
+
+    </title>
+
+    <link href="<?=BASE_URL.'dist/css/bootstrap.min.css'?>" rel="stylesheet">
+    <link href="<?=BASE_URL.'dist/css/style.css'?>" rel="stylesheet">
+    <link href="<?=BASE_URL.'dist/css/signin.css'?>" rel="stylesheet">
+
+    <script>
+      let urlLogin = <?php echo json_encode(REQUEST.'ctrl_login.php'); ?>;
+    </script>
+  </head>
+  <body class="text-center">

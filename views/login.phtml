@@ -1,0 +1,27 @@
+<?php 
+    if($_SESSION['usr_hetic']){
+        header('location:?p=dashboard');
+    }
+?>
+<main class="form-signin">
+  <form>
+    <img class="mb-4 logo" src="<?=BASE_URL.'img/brand/logo.png'?>" alt="" width="90">
+    <h1 class="h3 mb-3 fw-normal">Authentification</h1>
+
+    <form action="">
+        <div class="form-group message"></div>
+        <div class="form-group">
+            <label for="inputEmail" class="visually-hidden">email</label>
+            <input type="text" id="inputEmail" class="form-control require" placeholder="email">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="visually-hidden">Mot de passe</label>
+            <input type="password" id="inputPassword" class="form-control require" placeholder="Mot de passe">
+        </div>
+        <div class="form-group">
+            <button onclick="return false" class="w-100 btn btn-lg btn-success" id="submit" type="submit">Se connecter</button>
+        </div>
+    </form>
+    <p class="mt-5 mb-3 text-muted">&copy; HETIC WEB2 - 2021</p>
+  </form>
+</main>
